@@ -10,7 +10,8 @@ local M = {}
 ---@param args string[]
 ---@return ProcessResult
 function M.push_interactive(remote, branch, args)
-  return cli.push.args(remote or "", branch or "").arg_list(args).call_interactive()
+  local b = string.format("refs/heads/%s:refs/heads/%s", branch, branch)
+  return cli.push.args(remote or "", b or "").arg_list(args).call_interactive()
 end
 
 local function update_unmerged(state)
